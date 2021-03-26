@@ -1,3 +1,3 @@
 "# academia_django" 
-user_admin: admin
-password: admin
+"user_admin: admin"
+"password: admin"
