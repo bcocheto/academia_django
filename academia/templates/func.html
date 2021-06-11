@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block body%}
+<!-- section funcionalidades -->
+<section id="funcionarioss">
+	 <div class="min-h-1/4 py-6 flex flex-col justify-center sm:py-12">
+			<div class="p-8 m-4">
+				 <h1 class="text-left pl-5 text-gray-700 font-semibold text-3xl">Funcionários</h1>
+			</div>
+			<div class="grid lg:grid-cols-3 grid-cols-1 gap-4 px-10 ">
+				{%for f in funcionario%}
+				 <!-- card -->
+				 <div class="bg-white shadow bg-opacity-90 | flex justify-around cursor-pointer">
+						<img class="w-32 h-32 object-cover" src="{{ f.foto.thumb.url }}" alt="{{f.nome}}" />
+						<div class="flex flex-col justify-center">
+							<p class="text-gray-500 dark:text-gray-300 font-semibold ml-3 text-2xl">{{f.nome}}
+							</p>
+							<p class="text-gray-500 dark:text-gray-300 font-normal ml-3">{{f.descricao}}
+							</p>
+						</div>
+				 </div>
+				 <!-- end card -->
+{%endfor%}
+			</div>
+	 </div>
+</section>
+{%endblock%}
