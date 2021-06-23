@@ -4,7 +4,7 @@ from chartjs.views.lines import BaseLineChartView
 from django.db.models import Count
 from django.views.generic import TemplateView, ListView
 
-from academia.models import Cliente, Funcionario, Ficha
+from academia.models import Cliente, Funcionario, Ficha, Pessoa
 
 
 class IndexView(TemplateView):
@@ -48,7 +48,7 @@ class DadosAcademiaView(BaseLineChartView):
 
     def get_labels(self):
         labels = []
-        queryset = Cliente.objects
+        queryset = Cliente.objects.all()
         for cliente in queryset:
             labels.append(cliente.sexo)
         return labels
@@ -61,4 +61,3 @@ class DadosAcademiaView(BaseLineChartView):
             dados.append(int(linha.total))
         resultado.append(dados)
         return resultado
-

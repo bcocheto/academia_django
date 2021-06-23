@@ -5,11 +5,29 @@
 
 <script src="{% static 'js/Chart.min.js' %}"></script>
 <script>
-    $.get('{%url "dados-academia"%}, function(dados){
+    $.get('{%url "dados-academia"%}', function(dados){
     var ctx = $("#grafico-sexo").get(0).getContext("2d");
 
-    new Chart(ctx, {
+    rotulos = dados['labels']
+    valores = dados['datasets'][0]['data']
+
+		console.log(rotulos);
+
+		new Chart(ctx, {
     type: 'doughnut',
-    data: dados
-    }
+    data: {
+        labels: rotulos,
+        datasets: [{
+            data: valores,
+            backgroundColor:[
+                        '#F44336',
+                        '#5E35B1',
+                        '#3949AB',
+                        '#0097A7',
+                        ]
+    			    }]
+				}
+			});
+		});
+
 </script>
