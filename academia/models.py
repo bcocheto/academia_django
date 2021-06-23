@@ -17,6 +17,7 @@ class Pessoa(models.Model):
         ('Masculino', _('Masculino')),
         ('Feminino', _('Feminino')),
         ('Não Definido', _('Não Definido')),
+        ('Gay', _('Gay'))
     )
     nome = models.CharField("Nome", max_length=255)
     nascimento = models.DateField("Data Nascimento", help_text="Formato DD/MM/AAAA")

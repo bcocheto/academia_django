@@ -1,0 +1,15 @@
+{%load static%}
+<div>
+    <canvas id="grafico-sexo" height="300"></canvas>
+</div>
+
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script>
+    $.get('{%url "dados-academia"%}, function(dados){
+    var ctx = $("#grafico-sexo").get(0).getContext("2d");
+
+    new Chart(ctx, {
+    type: 'doughnut',
+    data: dados
+    }
+</script>

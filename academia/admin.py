@@ -21,3 +21,4 @@ class FichaAdmin(admin.ModelAdmin):
 @admin.register(Exercicio)
 class ExercicioAdmin(admin.ModelAdmin):
     list_display = ('nome', 'tipo', 'repeticoes')
+

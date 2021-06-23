@@ -1,6 +1,10 @@
+from abc import ABC
+
+from chartjs.views.lines import BaseLineChartView
+from django.db.models import Count
 from django.views.generic import TemplateView, ListView
 
-from academia.models import Cliente, Funcionario, Exercicio, Ficha
+from academia.models import Cliente, Funcionario, Ficha
 
 
 class IndexView(TemplateView):
@@ -32,9 +36,29 @@ class FichaView(ListView):
     def get_context_data(self, **kwargs):
         context = super(FichaView, self).get_context_data(**kwargs)
         id = self.kwargs['id']
-        context['ficha'] = Ficha.objects.filter(id=id).first
+        context['ficha'] = Ficha.objects.filter(cliente_id=id).first
         return context
 
     def get_queryset(self):
-        id = self.kwargs['ficha_id']
-        return Cliente.objects.filter(id=id)
+        id = self.kwargs['id']
+        return Ficha.objects.filter(id=id)
+
+
+class DadosAcademiaView(BaseLineChartView):
+
+    def get_labels(self):
+        labels = []
+        queryset = Cliente.objects
+        for cliente in queryset:
+            labels.append(cliente.sexo)
+        return labels
+
+    def get_data(self):
+        resultado = []
+        dados = []
+        queryset = Cliente.objects.annotate(total=Count('sexo'))
+        for linha in queryset:
+            dados.append(int(linha.total))
+        resultado.append(dados)
+        return resultado
+
