@@ -1,17 +1,29 @@
 {%load static%}
-<div>
-    <canvas id="grafico-sexo" height="300"></canvas>
+
+<div class="max-w-screen-sm">
+	    <canvas id="grafico-sexo" height="300"></canvas>
 </div>
 
 <script src="{% static 'js/Chart.min.js' %}"></script>
 <script>
     $.get('{%url "dados-academia"%}', function(dados){
     var ctx = $("#grafico-sexo").get(0).getContext("2d");
+		let valores = [0,0,0];
+    rotulos = dados['labels'];
 
-    rotulos = dados['labels']
-    valores = dados['datasets'][0]['data']
+		for (var i = 0; i < rotulos.length; i++) {
+			if (rotulos[i]=='Feminino') {
+				valores[0] += 1;
+			}
+			if (rotulos[i]=='Masculino') {
+				valores[1] += 1
+			}
+			if (rotulos[i]=='Não Definido') {
+				valores[1] += 1
+			}
+		}
 
-		console.log(rotulos);
+		console.log(valores);
 
 		new Chart(ctx, {
     type: 'doughnut',
